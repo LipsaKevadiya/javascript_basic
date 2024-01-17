@@ -73,12 +73,12 @@ console.log(hello());
 
 function init() {
   var name = "Mozilla"; // local variable created by init
-  function displayName() { // displayName() is the inner function, that forms the closure
+  function displayName() {
+    // displayName() is the inner function, that forms the closure
     console.log(name); // use variable declared in the parent function
   }
   displayName();
 }
 init();
 
-//Creating objects,Accessing and modifying properties,Methods and prototypes,Error Handling:Try, catch, finally,Closures and Scopes:Understanding scope,Creating and using closures,Arrow functions
-
+//Creating JS objects,Accessing and modifying properties,Methods and prototypes, Creating and using regular expressions methods like search,replace,exec,test, Error Handling:Try, catch, finally, Closures and Scopes:Understanding scope,Creating and using closures, DOM Manipulation:Selecting elements,Modifying HTML and CSS, JSON:Parsing and stringifying
