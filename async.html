@@ -1,0 +1,26 @@
+<!--Asynchronous JavaScript,setTimeout-->
+
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Async JS</h1>
+    <h2>To hide the notification after 5 seconds</h2>
+    <p id="notification">"Welcome to my page!"</p>
+
+    <script>
+      const notification = document.getElementById("notification");
+
+      function showNotification(message) {
+        notification.innerText = message;
+        notification.style.display = "block"; // take up the full width of its container
+
+        // Hide the notification after 5 seconds
+        setTimeout(() => {
+          notification.style.display = "none"; // hiding the notification.
+        }, 5000); //5 sec delay
+      }
+
+      showNotification("Welcome to my page!");
+    </script>
+  </body>
+</html>
