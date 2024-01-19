@@ -112,3 +112,13 @@ async function printAll(){
 }
 printAll()
 */
+//spread operator
+const arr1 = ["a", "b"];
+const arr2 = [4, 5, 6];
+
+const combinedArray = [...arr1, ...arr2];
+console.log(combinedArray);
+//Adding Elements to an Array
+const originalArray = [1, 2, 3];
+const newArray = [...originalArray, "hii", "lipsa"];
+console.log(newArray);

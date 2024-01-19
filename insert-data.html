@@ -1,0 +1,43 @@
+<html lang="en">
+  <body>
+    <h1>Insert Data into API</h1>
+    <!-- Insert Form -->
+    <form id="insertForm">
+      <label for="newTodoTitle">Todo Title:</label>
+      <input type="text" id="newTodoTitle" required />
+      <label for="newTodoCompleted">Completed:</label>
+      <input type="checkbox" id="newTodoCompleted" />
+      <button type="button" onclick="insertData()">Insert</button>
+    </form>
+    <script>
+      const apiUrl = "https://jsonplaceholder.typicode.com/posts";
+      function insertData() {
+        const newTodoTitle = document.getElementById("newTodoTitle").value;
+        const newTodoCompleted =
+          document.getElementById("newTodoCompleted").checked;
+        // Prepare data for insertion
+        const newData = {
+          title: newTodoTitle,
+          completed: newTodoCompleted,
+        };
+        // Make a POST request to insert data
+        fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newData),
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((insertedData) => {
+            console.log("Data inserted successfully:", insertedData);
+          })
+          .catch((error) => {
+            console.error("Insert error:", error);
+          });
+      }
+    </script>
+  </body>
+</html>
