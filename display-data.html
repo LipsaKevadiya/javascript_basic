@@ -1,0 +1,25 @@
+<html>
+  <body>
+    <h1>Display Data from API</h1>
+    <div id="apiDataDisplay"></div>
+    <script>
+      const apiUrl = "https://jsonplaceholder.typicode.com/posts";
+      const apiDataDisplay = document.getElementById("apiDataDisplay");
+      // Fetch data from the API
+      fetch(apiUrl)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          data.forEach((todo) => {
+            const todoInfo = document.createElement("p");
+            todoInfo.innerHTML = `ID: ${todo.id}, Title: ${todo.title}, Completed: ${todo.completed}`;
+            apiDataDisplay.appendChild(todoInfo);
+          });
+        })
+        .catch((error) => {
+          console.error("Fetch error:", error);
+        });
+    </script>
+  </body>
+</html>

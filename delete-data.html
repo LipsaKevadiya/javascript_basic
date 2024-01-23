@@ -1,0 +1,26 @@
+<html>
+  <body>
+    <button onclick="deletePost()">Delete Post</button>
+    <script>
+      const apiUrl = "https://jsonplaceholder.typicode.com/posts";
+      function deletePost() {
+        // Assuming we want to delete the post with id = 1
+        const postIdToDelete = 1;
+        fetch(`${apiUrl}/${postIdToDelete}`, {
+          method: "DELETE",
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                `Network response was not ok: ${response.status}`
+              );
+            }
+            console.log("Post deleted successfully");
+          })
+          .catch((error) => {
+            console.error("Error deleting post:", error);
+          });
+      }
+    </script>
+  </body>
+</html>

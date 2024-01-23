@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+          background-color: #f0f0f0; 
+          margin: 0;
+          padding: 0; 
+      }
+  </style>
+    <title>Twubric</title>
+  </head>
+  <body>
+    <div>
+      <div>
+        <div class="mt-4 px-5">
+          <div class="row mb-3">
+            <div class="col-md-6" style="color: darkslategrey;">
+              <div>
+                <h1 style="color: red;">Twubric</h1>
+              </div>
+              <label for="dateFilter">Joined Twitter between:</label>
+              <!-- <input type="text" class="form-control" id="dateFilter" placeholder="Select date range" /> -->
+              <label for="startDate" class="date" style="color: red;">Start Date:</label>
+              <input type="date" id="startDate" placeholder="YYYY-MM-DD">
+              <label for="endDate" class="date" style="color: red;">End Date:</label>
+              <input type="date" id="endDate" placeholder="YYYY-MM-DD">
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <div class="btn-group" role="group" aria-label="Sort By">
+                <button type="button" class="btn btn-secondary active" data-sort="twubric.total">
+                  Twubric Score
+                </button>
+                <button type="button" class="btn btn-secondary" data-sort="twubric.friends">
+                  Friends
+                </button>
+                <button type="button" class="btn btn-secondary" data-sort="twubric.influence">
+                  Influence
+                </button>
+                <button type="button" class="btn btn-secondary" data-sort="twubric.chirpiness">
+                  Chirpiness
+                </button>
+              </div>
+            </div>
+          </div>
+
+      </div>
+    <div id="userContainer" class="allDivData"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <!-- Popper.js library, is used for positioning and aligning of popovers and tooltips in web development -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      // Fetch JSON data
+      fetch("./db.json")
+        .then((response) => response.json())
+        .then((data) => {
+          // Access the array of users
+          const users = data.users;
+
+          // Iterate through users and create HTML content
+          users.forEach((user) => {
+            const htmlContent = `
+           
+              <div class="row">
+                <div class="col-md-12">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Image</th>
+                        <th>Username</th>
+                        <th>Full Name</th>
+                        <th>Twubric Score</th>
+                        <th>Join Date</th>
+                        <th>Friends</th>
+                        <th>Influence</th>
+                        <th>Chirpiness</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <style>
+                            .round-image {
+                              border-radius: 50%;
+                              overflow: hidden;
+                            }
+                          </style>
+                          <img src="${user.image}" alt="Round Image" class="round-image" />
+                        </td>
+                        <td>${user.username}</td>
+                        <td>${user.fullname}</td>
+                        <td>${user.twubric.total}</td>
+                        <td>${new Date(user.join_date * 1000).toDateString()}</td>
+                        <td>${user.twubric.friends}</td>
+                        <td>${user.twubric.influence}</td>
+                        <td>${user.twubric.chirpiness}</td>
+                        <td>
+                          <button type="button" class="btn btn-danger btn-sm" onclick="removeUser(${user.id})">
+                            Remove
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          `;
+
+            // Append HTML content to the container
+            document.getElementById("userContainer").innerHTML += htmlContent;
+          });
+        })
+        .catch((error) => console.error("Error fetching JSON:", error));
+
+      // Function to handle user removal
+      function removeUser(uid) {
+        // Implement the removal logic here
+        alert("User removed with UID: " + uid);
+      }
+    </script>
+  </body>
+</html>

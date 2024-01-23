@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Data in API</title>
+  </head>
+  <body>
+    <h1>Update Data in API</h1>
+    <!-- Update Form -->
+    <form id="updateForm">
+      <label for="updateTodoId">Todo ID:</label>
+      <input type="number" id="updateTodoId" required />
+      <label for="updatedTodoTitle">Updated Title:</label>
+      <input type="text" id="updatedTodoTitle" required />
+      <label for="updatedTodoCompleted">Updated Completed:</label>
+      <input type="checkbox" id="updatedTodoCompleted" />
+      <button type="button" onclick="updateData()">Update</button>
+    </form>
+    <script>
+      const apiUrl = "https://jsonplaceholder.typicode.com/posts";
+      function updateData() {
+        const updateTodoId = document.getElementById("updateTodoId").value;
+        const updatedTodoTitle =
+          document.getElementById("updatedTodoTitle").value;
+        const updatedTodoCompleted = document.getElementById(
+          "updatedTodoCompleted"
+        ).checked;
+        // Prepare data for update
+        const updatedData = {
+          title: updatedTodoTitle,
+          completed: updatedTodoCompleted,
+        };
+        // Make a PUT request to update data
+        fetch(`${apiUrl}/${updateTodoId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedData),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                `Network response was not ok: ${response.statusText}`
+              );
+            }
+            return response.json();
+          })
+          .then((updatedTodo) => {
+            console.log("Data updated successfully:", updatedTodo);
+          })
+          .catch((error) => {
+            console.error("Update error:", error);
+          });
+      }
+    </script>
+  </body>
+</html>
