@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Color Background</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.5s;
+      }
+
+      button {
+        font-size: 16px;
+        padding: 10px;
+        margin: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="startColorChange()">Start</button>
+    <button onclick="stopColorChange()" disabled>Stop</button>
+
+    <script>
+      let colorChangeInterval;
+      let r = Date.now(); // Initial seed value
+
+      function linearCongruentialGenerator() {
+        // const a = 1664525; // Multiplier
+        // const c = 1013904223; // Increment
+        // const m = 4294967296; // Modulus 2^32
+
+        // now = (now * a + c) % m;
+        // return now;
+        // Linear congruential generator without using common math operators
+        r ^= r << 11;
+        r ^= r >>> 13;
+        r ^= r << 5;
+
+        // Use logical AND to limit the result to a positive integer
+        return r & 0x7fffffff;
+      }
+      console.log(generateRandomNumber());
+      function generateRandomColorCode() {
+        // Generate a random hexadecimal color code
+        return (
+          "#" +
+          (linearCongruentialGenerator() & 0xffffff)
+            .toString(16)
+            .padStart(6, "0")
+        );
+      }
+
+      function changeBackgroundColor() {
+        document.body.style.backgroundColor = generateRandomColorCode();
+      }
+
+      function startColorChange() {
+        colorChangeInterval = setInterval(changeBackgroundColor, 1000); // Change color every second
+        document.querySelector("button:nth-child(1)").disabled = true;
+        document.querySelector("button:nth-child(2)").disabled = false;
+      }
+
+      function stopColorChange() {
+        clearInterval(colorChangeInterval);
+        document.querySelector("button:nth-child(1)").disabled = false;
+        document.querySelector("button:nth-child(2)").disabled = true;
+      }
+    </script>
+  </body>
+</html>
