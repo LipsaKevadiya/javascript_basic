@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Task Management Application</title>
+    <link rel="stylesheet" href="myStyle9.css" />
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Task Management Application</h1>
+
+      <div id="loginSection">
+        <h2>Login</h2>
+        <form id="loginForm">
+          <label for="username">Username:</label>
+          <input type="text" id="username" autocomplete="off" required />
+          <br />
+          <label for="password">Password:</label>
+          <input type="password" id="password" required />
+          <br />
+          <button type="button" onclick="authenticateUser()">Login</button>
+        </form>
+        <p id="loginMessage"></p>
+      </div>
+
+      <div id="taskSection" style="display: none">
+        <h2>Task List</h2>
+        <ul id="taskList"></ul>
+
+        <h2>Add New Task</h2>
+        <form id="taskForm">
+          <label for="newTask">Task:</label>
+          <input type="text" id="newTask" autocomplete="off" required />
+          <br />
+          <button type="button" onclick="postNewTask()">Add Task</button>
+        </form>
+        <p id="postMessage"></p>
+      </div>
+    </div>
+
+    <script src="myScripts9.js"></script>
+  </body>
+</html>
