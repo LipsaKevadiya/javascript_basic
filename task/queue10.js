@@ -1,5 +1,3 @@
-//------------------------------------------------------------------------------------------------
-
 class Queue {
   constructor() {
     this.items = []; //store task
@@ -93,21 +91,4 @@ async function fetchDataAndEnqueue(url) {
   // await fetchDataAndEnqueue("https://jsonplaceholder.typicode.com/todos/3");
   // log the items in the queue after API calls are enqueued
   console.log("my Queue items----------", myQueue.items);
-  // while (myQueue.items.length > 0 || myQueue.isBusy) {
-  //   await new Promise((resolve) => setTimeout(resolve, 1000));
-  // }
-  //console.log("my Queue items-", myQueue.items); //[]
 })();
-
-/*
-my Queue items::::::::: [
-  { userId: 1, id: 1, title: 'delectus aut autem', completed: false },
-  {
-    userId: 1,
-    id: 2,
-    title: 'quis ut nam facilis et officia qui',
-    completed: false
-  },
-  { userId: 1, id: 3, title: 'fugiat veniam minus', completed: false }
-]
-*/
