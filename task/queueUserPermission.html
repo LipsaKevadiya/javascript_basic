@@ -1,0 +1,262 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="display">
+      <p>Please enter "yes" or "no":</p>
+      <form id="userInputForm">
+        <input type="text" id="userInput" name="userInput" />
+        <button type="submit" id="submit">Submit</button>
+      </form>
+    </div>
+
+    <script>
+      class Queue {
+        constructor() {
+          this.items = [];
+          this.isBusy = false;
+          this.currentIndex = 1; // Start index from 1
+        }
+
+        enqueue(element) {
+          this.items.push({ index: this.currentIndex++, task: element });
+          if (!this.isBusy && this.items.length === 1) {
+            // Start processing only if the queue was empty before enqueueing
+            this.dequeue();
+          }
+        }
+
+        async dequeue() {
+          if (this.items.length === 0) {
+            console.log("Queue is empty");
+            return false;
+          }
+
+          if (this.isBusy) {
+            console.log("Queue is busy");
+            return false;
+          }
+
+          const { index, task } = this.items[0]; // Peek at the first task without removing it
+          this.isBusy = true;
+
+          try {
+            await task();
+            console.log(`Task ${index} completed successfully.`);
+            console.log("my Queue items----------", this.items);
+          } catch (error) {
+            console.error(`Task ${index} failed with error:`, error);
+          } finally {
+            this.items.shift(); // Remove the completed task
+            this.isBusy = false;
+            this.dequeue(); // Continue with the next task
+          }
+        }
+
+        fetchDataAndEnqueue(url) {
+          const task = async () => {
+            try {
+              const response = await fetch(url);
+              const json = await response.json();
+              console.log("json--------------------", json);
+              console.log("Fetched data for URL-------------", url);
+            } catch (error) {
+              console.error(`Error fetching data for URL ${url}:`, error);
+            }
+          };
+
+          this.enqueue(task);
+          console.log("my Queue items----------", this.items);
+        }
+      }
+
+      const myQueue = new Queue();
+
+      function hideDiv() {
+        var displayDiv = document.getElementById("display");
+        setTimeout(function () {
+          displayDiv.style.display = "none";
+        }, 5000);
+      }
+
+      // Call the function to hide the div
+      hideDiv();
+
+      // Add event listener to the submit button
+      document
+        .getElementById("submit")
+        .addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent the form from submitting and refreshing the page
+
+          var userInput = document
+            .getElementById("userInput")
+            .value.toLowerCase();
+
+          if (userInput === "yes") {
+            // Assuming you have a Queue instance named myQueue
+            myQueue.fetchDataAndEnqueue(
+              "https://jsonplaceholder.typicode.com/todos/" +
+                myQueue.currentIndex
+            );
+            myQueue.fetchDataAndEnqueue(
+              "https://jsonplaceholder.typicode.com/todos/" +
+                myQueue.currentIndex
+            );
+            myQueue.fetchDataAndEnqueue(
+              "https://jsonplaceholder.typicode.com/todos/" +
+                myQueue.currentIndex
+            );
+          } else if (userInput === "no") {
+            console.log("User permission rejected.");
+          } else {
+            console.log("Invalid input. Please enter 'yes' or 'no'.");
+          }
+        });
+    </script>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="display">
+      <p>Please enter "yes" or "no":</p>
+      <form id="userInputForm">
+        <input type="text" id="userInput" name="userInput" />
+        <button type="submit" id="submit">Submit</button>
+      </form>
+    </div>
+
+    <script>
+      class Queue {
+        constructor() {
+          this.items = [];
+          this.isBusy = false;
+          this.currentIndex = 1; // Start index from 1
+        }
+
+        enqueue(element) {
+          this.items.push({ index: this.currentIndex++, task: element });
+          console.log("enqueue item:::", this.items);
+          if (!this.isBusy && this.items.length === 1) {
+            // Start processing only if the queue was empty before enqueueing
+            this.dequeue();
+          }
+        }
+
+        async dequeue() {
+          if (this.items.length === 0) {
+            console.log("Queue is empty");
+            return false;
+          }
+
+          if (this.isBusy) {
+            console.log("Queue is busy");
+            return false;
+          }
+
+          const { index, task } = this.items[0]; // Peek at the first task without removing it
+          this.isBusy = true;
+
+          try {
+            await task();
+            console.log(`Task ${index} completed successfully.`);
+            console.log("my Queue items----------", this.items);
+          } catch (error) {
+            console.error(`Task ${index} failed with error:`, error);
+          } finally {
+            this.items.shift();
+            console.log("dequeue item:::", this.items); // Remove the completed task
+            this.isBusy = false;
+            this.dequeue(); // Continue with the next task
+          }
+        }
+        //--------------------------------------------------------------------------------
+        async fetchDataAndEnqueue(url) {
+          return new Promise(async (resolve, reject) => {
+            // const userInput = prompt(
+            //   "Do you want to enqueue the task? (yes/no)"
+            // ).toLowerCase();
+            var userInput = document
+              .getElementById("userInput")
+              .value.toLowerCase();
+
+            if (userInput === "yes") {
+              const task = async () => {
+                try {
+                  const response = await fetch(url);
+                  const json = await response.json();
+                  console.log("json--------------------", json);
+                  console.log("Fetched data for URL-------------", url);
+                  resolve(json);
+                } catch (error) {
+                  reject(error);
+                  throw error;
+                }
+              };
+
+              this.enqueue(task);
+              console.log("my Queue items----------", this.items);
+            } else {
+              console.log("Task not enqueued.");
+              resolve(); // Resolve the promise without enqueuing if user input is not "yes"
+            }
+          });
+        }
+      }
+
+      const myQueue = new Queue();
+
+      function hideDiv() {
+        var displayDiv = document.getElementById("display");
+        setTimeout(function () {
+          displayDiv.style.display = "none";
+        }, 5000);
+      }
+
+      // Call the function to hide the div
+      hideDiv();
+
+      // Add event listener to the submit button
+      document
+        .getElementById("submit")
+        .addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent the form from submitting and refreshing the page
+
+          var userInput = document
+            .getElementById("userInput")
+            .value.toLowerCase();
+
+          if (userInput === "yes") {
+            // Assuming you have a Queue instance named myQueue
+            console.log("Enqueuing tasks...");
+            myQueue.fetchDataAndEnqueue(
+              "https://jsonplaceholder.typicode.com/todos/1" +
+                myQueue.currentIndex
+            );
+            myQueue.fetchDataAndEnqueue(
+              "https://jsonplaceholder.typicode.com/todos/2" +
+                myQueue.currentIndex
+            );
+            myQueue.fetchDataAndEnqueue(
+              "https://jsonplaceholder.typicode.com/todos/3" +
+                myQueue.currentIndex
+            );
+          } else if (userInput === "no") {
+            console.log("User permission rejected.");
+          } else {
+            console.log("Invalid input. Please enter 'yes' or 'no'.");
+          }
+        });
+    </script>
+  </body>
+</html>
