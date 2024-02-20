@@ -128,3 +128,18 @@ var arr = [1, 2, 3, 4, 5];
 arr.splice(2, 0);
 console.log(arr);
 //o/p:[ 1, 2, 3, 4, 5 ]
+
+//factorial
+
+function factorial(n: number): number {
+  if (n === 0 || n === 1) {
+    return 1;
+  } else {
+    return n * factorial(n - 1);
+  }
+}
+
+// Example usage:
+const number: number = 5;
+const result: number = factorial(number);
+console.log(`The factorial of ${number} is: ${result}`);
