@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text on Image</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        border: 2px solid grey;
+      }
+      /* Container for the image and text */
+      .image-container {
+        position: relative;
+        width: 100%;
+        max-width: 500px; /* Adjust as needed */
+      }
+
+      /* Style for the image */
+      .image-container img {
+        /* width: 100%; */
+        height: auto;
+        display: block;
+        max-width: 100%;
+      }
+      .clarity-top {
+        position: absolute;
+        top: 12%;
+        left: 39%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 21px; /* Adjust as needed */
+        text-align: center;
+      }
+      .text-overlay1 {
+        position: absolute;
+        top: 14%;
+        left: 25%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 19px; /* Adjust as needed */
+        text-align: center;
+      }
+      /* Style for the text overlay */
+      .text-overlay {
+        position: absolute;
+        top: 23%;
+        left: 48%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 19px; /* Adjust as needed */
+        text-align: center;
+        opacity: 0.9;
+      }
+      .text-overlay2 {
+        position: absolute;
+        top: 29%;
+        left: 49%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 14px; /* Adjust as needed */
+        text-align: left;
+        font-weight: 50;
+        opacity: 0.7;
+      }
+      .form-container {
+        display: flex;
+        flex-direction: column;
+      }
+      .form-top {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 15%;
+        left: 49%;
+        font-size: 24px;
+      }
+      .form-input1 {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        font-weight: bold;
+        opacity: 0.65;
+        top: 25%;
+        left: 49%;
+      }
+      .form--input1 {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 27%;
+        left: 49%;
+        width: 484px;
+        height: 50px;
+      }
+      .form-input2 {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        font-weight: bold;
+        opacity: 0.65;
+        top: 32%;
+        left: 49%;
+      }
+      .forgotpwd a {
+        position: absolute;
+        top: 27%;
+        left: 477%;
+        white-space: nowrap;
+        font-size: 12px;
+        text-decoration: none;
+        /* color: #bfc1d2; */
+        /* color: #0b0303; */
+        color: #594f4f;
+        font-weight: bold;
+      }
+      .form--input2 {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 34%;
+        left: 49%;
+        width: 484px;
+        /* height: 100px; */
+      }
+      .eyelogo {
+        position: absolute;
+        top: 21%;
+        left: 93%;
+        height: 12px;
+        width: 21px;
+        font-size: 14px;
+      }
+      .checkbox {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        font-weight: bold;
+        opacity: 0.65;
+        top: 39%;
+        left: 49%;
+        /* color: #0b0303; */
+        color: #716666;
+      }
+      .loginbtn button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        position: absolute;
+        font-weight: bold;
+        opacity: 0.65;
+        top: 42%;
+        left: 49%;
+        background-color: black;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+        width: 483px;
+      }
+      .hr-lines {
+        position: relative;
+        top: -358px;
+        left: 230px;
+        max-width: 474px;
+        margin: 100px auto;
+        text-align: center;
+        color: darkgrey;
+      }
+
+      .hr-lines:before {
+        content: " ";
+        height: 2px;
+        width: 130px;
+        background: rgb(109, 108, 108);
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 0;
+      }
+
+      .hr-lines:after {
+        content: " ";
+        height: 2px;
+        width: 130px;
+        background: rgb(109, 108, 108);
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="image-container">
+      <img src="woman.jpeg" alt="no image" />
+      <div class="text-overlay1">
+        <svg
+          stroke="white"
+          fill="currentColor"
+          stroke-width="0"
+          viewBox="0 0 512 512"
+          height="1em"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="32"
+            d="m35.42 188.21 207.75 269.46a16.17 16.17 0 0 0 25.66 0l207.75-269.46a16.52 16.52 0 0 0 .95-18.75L407.06 55.71A16.22 16.22 0 0 0 393.27 48H118.73a16.22 16.22 0 0 0-13.79 7.71L34.47 169.46a16.52 16.52 0 0 0 .95 18.75zM48 176h416"
+          ></path>
+          <path
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="32"
+            d="m400 64-48 112-96-128M112 64l48 112 96-128m0 400-96-272m96 272 96-272"
+          ></path>
+        </svg>
+      </div>
+      <h1 class="clarity-top">CLARITY</h1>
+      <div class="text-overlay">Continue your design journey</div>
+      <div class="text-overlay2">
+        Let us help you achieve clarity in your design and take you to new
+        heights.
+      </div>
+    </div>
+
+    <div class="form-container">
+      <form action="">
+        <h1 class="form-top">Log in to Clarity</h1>
+        <div class="form-input1">
+          <label for="email">Email address:</label>
+        </div>
+        <div class="form--input1">
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-input2">
+          <label for="password">Password:</label>
+          <div class="forgotpwd"><a href="#">Forgot Password</a></div>
+        </div>
+
+        <div class="form--input2">
+          <input type="password" id="password" name="password" required /><img
+            src="eyeicon.png"
+            alt="no eye icon"
+            class="eyelogo"
+          />
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="rememberMe" name="rememberMe" /> Remember
+            Me for 30 days </label
+          ><br />
+        </div>
+        <div class="loginbtn">
+          <button type="button" onclick="submitForm()" class="loginButton">
+            Login
+          </button>
+        </div>
+        <h2 class="hr-lines">Or</h2>
+      </form>
+    </div>
+  </body>
+</html>

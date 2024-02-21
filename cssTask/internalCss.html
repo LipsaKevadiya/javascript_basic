@@ -2,74 +2,127 @@
 <html>
   <head>
     <style>
-      body {
-        background-color: linen;
-      }
-
-      h1 {
-        color: rgb(0, 87, 128);
-        margin-left: 40px;
-      }
-      div {
-        border: 1px solid black;
-        margin: 25px 50px 75px 100px;
-        background-color: lightblue;
-      }
-      /* box model----- */
-      #hi {
-        /* margin: auto; */
-        width: 200px;
-        height: 50px;
-        border: 10px solid rgb(233, 132, 208);
-        padding: 50px;
-        margin: 20px;
-      }
-
-      /* display property------------ */
-      .block-example {
-        display: block;
-        /* width: 200px;
-        height: 100px; */
-        background-color: lightblue;
-        /* margin-bottom: 10px; */
-      }
-
-      .inline-example {
-        display: inline;
-        background-color: lightgreen;
-        /* margin-right: 10px; */
-      }
-
-      .inline-block-example {
-        display: inline-block;
+        body {
+          background-color: linen;
+        }
+        #key:hover{
         width: 100px;
         height: 100px;
-        background-color: lightcoral;
-        /* margin-right: 10px; */
-      }
-      .flex-container {
-        display: flex;
-        justify-content: center;
-        /* border: 2px solid #999;
-        justify-content: flex-start;
-        /* justify-content: space-evenly; */
-        /* background-color: rgb(188, 210, 231); */ */
-        /* align-items: center; */
+        background: red;
+        position: relative;
+        animation: mymove 5s infinite;
       }
 
-      .flex-item {
-         /* flex-grow: 1; */
-        /* padding: 10px; */
-        width: 200px;
-        margin: 10px;
-        border: 1px solid #999;
-        background-color: rgb(188, 210, 231);
+        @keyframes mymove {
+          0%   {top: 0px; left: 0px; background: red;}
+          25%  {top: 0px; left: 100px; background: blue;}
+          50%  {top: 100px; left: 100px; background: yellow;}
+          75%  {top: 100px; left: 0px; background: green;}
+          100% {top: 0px; left: 0px; background: red;}
+        }
+        #box{
+          display: flex;
+          height: 200px;
+          width: 200px;
+          background-color: rgb(0, 38, 255);
+          justify-content: center;
+          align-items: center;
+          /* transition-property: background-color;
+          transition-duration: 1s;
+          transition-timing-function: ease-in-out;
+          transition-delay: 2s; */
+
+          /* Transition short hand property in one line */
+          /* transition: background-color 1s ease-in-out 2s; */
+
+
+          transition: all 1s ease-in-out .3s;
       }
+
+        #box:hover{
+            background-color: rgb(33, 215, 221);
+            height: 400px;
+            width: 400px;
+            border-radius: 100px;
+            font-size: 45px;
+
+        }
+        h1 {
+          color: rgb(0, 87, 128);
+          margin-left: 40px;
+        }
+        div {
+          border: 1px solid black;
+          margin: 25px 50px 75px 100px;
+          background-color: lightblue;
+        }
+        /* box model----- */
+        #hi {
+          /* margin: auto; */
+          width: 200px;
+          height: 50px;
+          border: 10px solid rgb(233, 132, 208);
+          padding: 50px;
+          margin: 20px;
+        }
+
+        /* display property------------ */
+        .block-example {
+          display: block;
+          /* width: 200px;
+          height: 100px; */
+          /* background-color: lightblue; */
+          /* margin-bottom: 10px; */
+        }
+
+        .inline-example {
+          display: inline;
+          background-color: lightgreen;
+          /* margin-right: 10px; */
+        }
+
+        .inline-block-example {
+          display: inline-block;
+          width: 100px;
+          height: 100px;
+          background-color: lightcoral;
+          /* margin-right: 10px; */
+        }
+        .flex-container {
+          display: flex;
+          justify-content: center;
+          /* border: 2px solid #999;
+          justify-content: flex-start;
+          /* justify-content: space-evenly; */
+          /* background-color: rgb(188, 210, 231); */ */
+          /* align-items: center; */
+        }
+
+        .flex-item {
+            /* flex-grow: 1; */
+          /* padding: 10px; */
+          width: 200px;
+          margin: 10px;
+          border: 1px solid #999;
+          background-color: rgb(188, 210, 231);
+        }
     </style>
   </head>
   <body>
     <h1>This is a heading</h1>
-    <p>This is a paragraph.</p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
+      cupiditate veniam dolore neque, eligendi suscipit unde nemo cum tenetur
+      aliquid repudiandae quae ut! Placeat quod maxime, incidunt autem quidem
+      id!
+    </p>
+    <h1>@keyframes Rule</h1>
+
+    <div id="key">for keyframe</div>
+    <!-- <div class="container"> -->
+    <br />
+    <div id="box">This is my box</div>
+    <!-- </div> -->
     <div>
       This div element has a top margin of 25px, a right margin of 50px, a
       bottom margin of 75px, and a left margin of 100px.
@@ -86,6 +139,9 @@
       <div class="flex-item">Flex Item 1</div>
       <div class="flex-item">Flex Item 2</div>
       <div class="flex-item">Flex Item 3</div>
+    </div>
+    <div id="logo">
+      <img src="logo.jpg" alt="no logo" />
     </div>
   </body>
 </html>
