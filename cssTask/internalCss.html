@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        background-color: linen;
+      }
+
+      h1 {
+        color: rgb(0, 87, 128);
+        margin-left: 40px;
+      }
+      div {
+        border: 1px solid black;
+        margin: 25px 50px 75px 100px;
+        background-color: lightblue;
+      }
+      /* box model----- */
+      #hi {
+        /* margin: auto; */
+        width: 200px;
+        height: 50px;
+        border: 10px solid rgb(233, 132, 208);
+        padding: 50px;
+        margin: 20px;
+      }
+
+      /* display property------------ */
+      .block-example {
+        display: block;
+        /* width: 200px;
+        height: 100px; */
+        background-color: lightblue;
+        /* margin-bottom: 10px; */
+      }
+
+      .inline-example {
+        display: inline;
+        background-color: lightgreen;
+        /* margin-right: 10px; */
+      }
+
+      .inline-block-example {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        background-color: lightcoral;
+        /* margin-right: 10px; */
+      }
+      .flex-container {
+        display: flex;
+        justify-content: center;
+        /* border: 2px solid #999;
+        justify-content: flex-start;
+        /* justify-content: space-evenly; */
+        /* background-color: rgb(188, 210, 231); */ */
+        /* align-items: center; */
+      }
+
+      .flex-item {
+         /* flex-grow: 1; */
+        /* padding: 10px; */
+        width: 200px;
+        margin: 10px;
+        border: 1px solid #999;
+        background-color: rgb(188, 210, 231);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>This is a heading</h1>
+    <p>This is a paragraph.</p>
+    <div>
+      This div element has a top margin of 25px, a right margin of 50px, a
+      bottom margin of 75px, and a left margin of 100px.
+    </div>
+
+    <div id="hi">This div is the content of the box model</div>
+
+    <div class="block-example">Block Element</div>
+
+    <span class="inline-example">Inline Element</span>
+
+    <div class="inline-block-example">Inline-Block Element</div>
+    <div class="flex-container">
+      <div class="flex-item">Flex Item 1</div>
+      <div class="flex-item">Flex Item 2</div>
+      <div class="flex-item">Flex Item 3</div>
+    </div>
+  </body>
+</html>

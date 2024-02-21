@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Example</title>
+
+    <style>
+      /* Global---- */
+      body {
+        border: 3px solid;
+        font-family: "Arial", sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f4f4f4;
+        /* background-image: url("https://media0.giphy.com/media/3o752g1oXFnv3NFZPa/200.webp?cid=ecf05e47tcj5b2yv9zj4kxfwjb2ppsvwpx1hsc19oin3alrx&ep=v1_gifs_search&rid=200.webp&ct=g"); */
+        /* background-repeat: repeat-x; */
+        background-size: auto;
+        margin: 0;
+        padding: 0;
+      }
+      p {
+        color: blue;
+        margin-right: 100px;
+      }
+      /* id selector------- */
+      /* Header Styles */
+      #header {
+        /* background-color: #007bff; */
+        /*background-color: rgba(71, 114, 255, 0.5);*/ /* r,g,b,50% transparency */
+        background-color: hsla(
+          9,
+          100%,
+          64%,
+          0.5
+        ); /* hue, saturation, lightness, 50% transparency*/
+        border: 2px dashed rgb(253, 11, 253);
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+      }
+
+      /* Class Selector------------ */
+      /* Container Styles */
+      .container {
+        width: 80%;
+        margin: 0 auto; /* top and bottom margins to zero, left and right auto*/
+        padding: 20px;
+      }
+
+      /* Descendant Selector--------*/
+      /* Article Styles */
+      article p {
+        color: #fc4949;
+        text-align: left;
+      }
+
+      /* Box Styles ----------*/
+      .box {
+        width: 200px;
+        height: 150px;
+        padding: 20px;
+        border: 2px solid #ccc;
+        margin: 10px;
+      }
+
+      /* Display Property -------- */
+      .inline-block {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        background-color: #ecabcf;
+      }
+
+      /* Positioning Styles-------------- */
+      .relative {
+        position: relative;
+        border: 3px solid #93ac70;
+        left: 50px;
+        top: 10px;
+      }
+
+      .absolute {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+
+        left: 50px;
+        width: 100px;
+        height: 100px;
+        background-color: #3498db;
+        /* position: absolute;
+        top: 50px;
+        left: 50px;
+        width: 150px;
+        height: 150px;
+        background-color: #3498db;
+        color: #fff;
+        padding: 10px; */
+      }
+
+      .fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+
+      .static {
+        position: static;
+        border: 3px solid #73ad21;
+      }
+
+      /* Flexbox Styles-------------------- */
+      .flex-container {
+        display: flex;
+        flex-direction: column;
+        border: 2px solid #999;
+        /* justify-content: flex-start; */
+        /* justify-content: space-evenly; */
+        background-color: rgb(188, 210, 231);
+        align-items: center;
+        /* align-content: flex-start; */
+        align-content: start;
+      }
+
+      .flex-item {
+        /* flex-grow: 1; */
+        padding: 10px;
+        width: 100px;
+        margin: 10px;
+        /* border: 1px solid #999; */
+        border: 1px solid #ccc;
+        background-color: rgb(105, 188, 216);
+      }
+
+      /* Grid Styles-------------------------*/
+      .grid-container {
+        display: grid;
+        grid-template-rows: 1fr 2fr 3fr;
+        grid-template-columns: repeat(3, 1fr); /*3 column, 1 col*/
+        gap: 20px;
+      }
+
+      .grid-item {
+        padding: 10px;
+        border: 1px solid #ccc;
+        justify-self: auto;
+      }
+
+      /* Float Styles-------------------------*/
+      #img1 {
+        float: left;
+        margin-right: 100px;
+        border-radius: 50%;
+        /* responsive image */
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header id="header">
+      <h1>CSS Example</h1>
+    </header>
+    <p>hyy this is for element selector</p>
+    <div class="container">
+      <!-- Descendant Selector----------->
+      <article>
+        <h2>Article Title</h2>
+        <p>
+          This is a sample article text. It can have multiple paragraphs and
+          various content.
+        </p>
+        <p>
+          This is another a sample article text. It can have multiple paragraphs
+          and various content.
+        </p>
+      </article>
+
+      <div class="box">Here is the Box Content</div>
+
+      <div class="inline-block">Here is the Inline Box Content</div>
+
+      <div class="relative">Relative Positioning</div>
+      <div class="absolute">Absolute Positioning</div>
+      <div class="fixed">Fixed Positioning</div>
+      <div class="static">This div has static Positioning</div>
+
+      <br />
+      <div class="flex-container">
+        <div class="flex-item">Flex Item 1</div>
+        <div class="flex-item">Flex Item 2</div>
+        <div class="flex-item">Flex Item 3</div>
+      </div>
+
+      <div class="grid-container">
+        <div class="grid-item">Grid Item 1</div>
+        <div class="grid-item">Grid Item 2</div>
+        <div class="grid-item">Grid Item 3</div>
+        <div class="grid-item">Grid Item 4</div>
+        <div class="grid-item">Grid Item 5</div>
+        <div class="grid-item">Grid Item 6</div>
+        <div class="grid-item">Grid Item 7</div>
+        <div class="grid-item">Grid Item 8</div>
+        <div class="grid-item">Grid Item 9</div>
+      </div>
+    </div>
+    <img
+      src="https://media0.giphy.com/media/3o752g1oXFnv3NFZPa/200.webp?cid=ecf05e47tcj5b2yv9zj4kxfwjb2ppsvwpx1hsc19oin3alrx&ep=v1_gifs_search&rid=200.webp&ct=g"
+      height="150px"
+      id="img1"
+    />
+    <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti, odit
+      cumque. Fuga pariatur, iusto aliquid incidunt labore excepturi? Debitis
+      sint dolor iure placeat dolorum perspiciatis quae veritatis expedita
+      corporis quibusdam.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis maxime,
+      libero inventore earum officia, mollitia molestiae delectus tempora
+      perspiciatis quia molestias? Obcaecati officiis quo minus excepturi saepe
+      deserunt aperiam amet!
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis maxime,
+      libero inventore earum officia, mollitia molestiae delectus tempora
+      perspiciatis quia molestias? Obcaecati officiis quo minus excepturi saepe
+      deserunt aperiam amet!
+    </p>
+  </body>
+</html>
