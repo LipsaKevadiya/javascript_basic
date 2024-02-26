@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Management</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      .btn {
+        padding: 10px;
+        margin: 5px;
+        cursor: pointer;
+        /* background-color: #26e02f; */
+        background-color: #4caf50;
+        color: #fff;
+
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .logout-btn {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Employee List</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="employeesContainer">
+        <!-- Employee data will be populated here using JavaScript -->
+      </tbody>
+    </table>
+
+    <button class="btn" onclick="addEmployee()">Add Employee</button>
+    <button class="btn" onclick="editEmployee()">Edit Employee</button>
+    <button class="btn" onclick="deleteEmployee()">Delete Employee</button>
+    <button class="btn" onclick="logout()" style="float: right">Logout</button>
+
+    <script>
+      function addEmployee() {
+        // console.log("Adding Employee...");
+        window.location.href = "employeAdd.html";
+      }
+
+      function editEmployee() {
+        // console.log("Editing Employee with ID:", employeeId);
+        window.location.href = "employeAdd.html";
+      }
+
+      function deleteEmployee() {
+        // console.log("Deleting Employee with ID:", employeeId);
+        window.location.href = "employeDelete.html";
+      }
+
+      function logout() {
+        // Redirect to login page
+        window.location.href = "employeLogin.html";
+      }
+
+      // Fetch employee data from API
+      fetch("http://localhost:3000/signup")
+        .then((response) => response.json())
+        .then((data) => {
+          const employeesContainer =
+            document.getElementById("employeesContainer");
+          data.forEach((employee) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                        <td>${employee.username}</td>
+                        <td>${employee.email}</td>
+                    `;
+            employeesContainer.appendChild(row);
+          });
+        });
+    </script>
+  </body>
+</html>
