@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="employeSignUp.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+  </head>
+  <body>
+    <div class="container">
+      <form class="signup-form" id="signup-form">
+        <h2>Sign Up</h2>
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter your username"
+          required
+        />
+
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          required
+        />
+
+        <label for="confirm-password">Confirm Password:</label>
+        <input
+          type="password"
+          id="confirm-password"
+          name="confirm-password"
+          placeholder="Confirm your password"
+          required
+        />
+
+        <button type="button" onclick="validateSignUpForm()">Sign Up</button>
+      </form>
+    </div>
+    <script>
+      function validateSignUpForm() {
+        // console.log("hiii");
+        let isValid = true;
+
+        // Username validation
+        const usernameInput = document.getElementById("username");
+        console.log("Username:", usernameInput.value);
+        if (!usernameInput.value.trim()) {
+          alert("Username cannot be empty");
+          isValid = false;
+        }
+
+        // Email validation
+        // const emailInput = document.getElementById("email");
+        // console.log("Email:", emailInput.value);
+        // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // if (!emailRegex.test(emailInput.value.trim())) {
+        //   alert("Enter a valid email address");
+        //   isValid = false;
+        // }
+
+        // Email validation
+        const emailInput = document.getElementById("email");
+        console.log("Email:", emailInput.value);
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (
+          !emailRegex.test(emailInput.value.trim()) ||
+          !emailInput.value.includes(".com")
+        ) {
+          alert("Enter a valid email address with '.com'");
+          isValid = false;
+        }
+
+        // Password validation
+        const passwordInput = document.getElementById("password");
+        console.log("Password:", passwordInput.value);
+        if (passwordInput.value.length < 8) {
+          alert("Password must be at least 8 characters long");
+          isValid = false;
+        }
+
+        // Confirm Password validation
+        const confirmPasswordInput =
+          document.getElementById("confirm-password");
+        console.log("Confirm Password:", confirmPasswordInput.value);
+        if (confirmPasswordInput.value !== passwordInput.value) {
+          alert("Passwords do not match");
+          isValid = false;
+        }
+
+        if (isValid) {
+          // Log form data in the console
+          console.log("Form submitted successfully!");
+          console.log("Username:", usernameInput.value);
+          console.log("Email:", emailInput.value);
+          console.log("Password:", passwordInput.value);
+          console.log("Confirm Password:", confirmPasswordInput.value);
+        }
+
+        const apiUrl = "http://localhost:3000/signup"; // Replace with your API endpoint
+
+        const formData = {
+          username: document.getElementById("username").value,
+          email: document.getElementById("email").value,
+          password: document.getElementById("password").value,
+          confirm_password: document.getElementById("confirm-password").value,
+        };
+
+        fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            // You may need to include additional headers like authentication tokens
+          },
+          body: JSON.stringify(formData),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // Handle the successful response
+            console.log("successfully added", data);
+          })
+          .catch((error) => {
+            // Handle errors during the fetch request
+            console.error("Fetch error:", error);
+          });
+        // console.log("llllllll", result);
+        // if (result.success) {
+        //   alert(result.message);
+        // } else {
+        //   alert("Error response");
+        // }
+      }
+    </script>
+  </body>
+</html>

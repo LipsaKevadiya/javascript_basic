@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="employeLogin.css" />
+    <title>Login Page</title>
+  </head>
+  <body>
+    <div class="login-container">
+      <form class="login-form">
+        <h1>Login</h1>
+        <label for="email">Email:</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Enter email"
+          required
+        />
+        <span id="emailError" class="error"></span>
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter password"
+          required
+        />
+        <span id="passwordError" class="error"></span>
+        <button type="button" onclick="validateLoginForm()">Login</button>
+        <br />
+        <br />
+        <p class="signup-text">
+          Not a member? <a href="employeSignUp.html">Sign up now</a>
+        </p>
+      </form>
+    </div>
+    <script>
+      function validateLoginForm() {
+        console.log("hiii");
+        let isValid = true;
+
+        // Email validation
+        // const emailInput = document.getElementById("email");
+        // console.log("Email:", emailInput.value);
+        // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // if (!emailRegex.test(emailInput.value.trim())) {
+        //   alert("Enter a valid email address");
+        //   isValid = false;
+        // }
+
+        // Email validation
+        const emailInput = document.getElementById("email");
+        console.log("Email:", emailInput.value);
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (
+          !emailRegex.test(emailInput.value.trim()) ||
+          !emailInput.value.includes(".com")
+        ) {
+          alert("Enter a valid email address with '.com'");
+          isValid = false;
+        }
+
+        // Password validation
+        const passwordInput = document.getElementById("password");
+        console.log("Password:", passwordInput.value);
+        if (passwordInput.value.length < 8) {
+          alert("Password must be at least 8 characters long");
+          isValid = false;
+        }
+
+        if (isValid) {
+          // Log form data in the console
+          console.log("Form submitted successfully!");
+
+          console.log("Email:", emailInput.value);
+          console.log("Password:", passwordInput.value);
+        }
+      }
+    </script>
+  </body>
+</html>
