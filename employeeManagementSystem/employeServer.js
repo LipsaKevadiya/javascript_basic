@@ -1,56 +1,3 @@
-// const http = require("http");
-
-// // const employee = [];
-// const server = http.createServer((req, res) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   if (req.method === "OPTIONS") {
-//     // Handle preflight requests
-//     res.setHeader("Access-Control-Allow-Methods", "POST");
-//     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-//     res.writeHead(200);
-//     res.end();
-//     return;
-//   }
-
-//   if (req.method === "POST" && req.url === "/signup") {
-//     let body = "";
-
-//     // Listen for data events to accumulate the POST data
-//     req.on("data", (chunk) => {
-//       body += chunk.toString();
-//     });
-
-//     // Listen for the end event to process the entire data
-//     req.on("end", () => {
-//       const data = JSON.parse(body);
-
-//       // At this point, 'body' contains the complete POST data
-//       console.log("Received data:", body);
-//       // console.log("Username:", data.username);
-//       // console.log("Email:", data.email);
-//       // You can process the data further, e.g., save it to a database
-
-//       // Send a response to the client
-//       // res.writeHead(200, { "Content-Type": "text/plain" });
-//       // res.end("Data received successfully!");
-//       // employee.push(formData);
-//       const responseData = { message: "Data received successfully!" };
-//       res.writeHead(200, { "Content-Type": "application/json" });
-//       res.end(JSON.stringify(responseData));
-//     });
-//   } else {
-//     // Handle other requests or routes
-//     res.writeHead(404, { "Content-Type": "text/plain" });
-//     res.end("Not Found");
-//   }
-// });
-
-// const PORT = 3000;
-
-// server.listen(PORT, () => {
-//   console.log(`Server running at http://localhost:${PORT}`);
-// });
-
 const http = require("http");
 const PORT = 3000;
 const employees = [
@@ -66,7 +13,7 @@ const server = http.createServer((req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   if (req.method === "OPTIONS") {
     // Handle preflight requests
-    res.setHeader("Access-Control-Allow-Methods", "POST");
+    res.setHeader("Access-Control-Allow-Methods", "POST, PUT, DELETE");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
     res.writeHead(200);
     res.end();
@@ -91,7 +38,7 @@ const server = http.createServer((req, res) => {
       req.on("end", () => {
         const newEmployee = JSON.parse(body);
         employees.push(newEmployee);
-        console.log(employees);
+        console.log("Sign up data:::::::", employees);
         res.writeHead(201, { "Content-Type": "application/json" });
         res.end(JSON.stringify(newEmployee));
       });
@@ -118,33 +65,126 @@ const server = http.createServer((req, res) => {
         res.writeHead(401, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: "Invalid credentials" }));
       }
+      console.log("after login:::::::", employees);
     });
   } else if (url.pathname === "/list" && req.method === "GET") {
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(employees));
-    // } else if (url.pathname === "/signin" && req.method === "DELETE") {
-    //   const emailToDelete = url.searchParams.get("email");
+  } else if (url.pathname === "/updatedata" && req.method === "PUT") {
+    let body = "";
 
-    //   if (!emailToDelete) {
-    //     res.writeHead(400, { "Content-Type": "application/json" });
-    //     res.end(
-    //       JSON.stringify({ success: true, message: "Missing email parameter" })
+    req.on("data", (chunk) => {
+      body += chunk.toString();
+    });
+
+    req.on("end", () => {
+      const updatedEmployee = JSON.parse(body);
+      const emailToUpdate = updatedEmployee.email;
+
+      const existingEmployeeIndex = employees.findIndex(
+        (e) => e.email === emailToUpdate
+      );
+
+      if (existingEmployeeIndex !== -1) {
+        // If email is being updated, check if the new email already exists
+        if (
+          updatedEmployee.new_email &&
+          updatedEmployee.new_email !== emailToUpdate
+        ) {
+          const emailAlreadyExists = employees.some(
+            (e) => e.email === updatedEmployee.new_email
+          );
+
+          if (emailAlreadyExists) {
+            res.writeHead(400, { "Content-Type": "application/json" });
+            res.end(
+              JSON.stringify({
+                message: "New email already exists, update failed",
+              })
+            );
+            return;
+          }
+        }
+
+        // Update the employee data
+        employees[existingEmployeeIndex] = {
+          ...employees[existingEmployeeIndex],
+          ...updatedEmployee,
+          confirm_password: updatedEmployee.password,
+          // newEmail: updatedEmployee.email,
+        };
+
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(
+          JSON.stringify({ message: "Employee data updated successfully" })
+        );
+      } else {
+        res.writeHead(404, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ message: "Employee not found" }));
+      }
+      console.log("after updation:::::::", employees);
+    });
+
+    // } else if (url.pathname === "/updatedata" && req.method === "PUT") {
+    //   let body = "";
+
+    //   req.on("data", (chunk) => {
+    //     body += chunk.toString();
+    //   });
+
+    //   req.on("end", () => {
+    //     const updatedEmployee = JSON.parse(body);
+    //     // Extracts email from the parsed object.
+    //     const emailToUpdate = updatedEmployee.email;
+
+    //     const existingEmployeeIndex = employees.findIndex(
+    //       (e) => e.email === emailToUpdate
     //     );
-    //     return;
-    //   }
 
-    //   const indexToDelete = employees.findIndex(
-    //     (employee) => employee.email === emailToDelete
-    //   );
+    //     if (existingEmployeeIndex !== -1) {
+    //       // Update the employee data
+    //       employees[existingEmployeeIndex] = {
+    //         ...employees[existingEmployeeIndex],
+    //         ...updatedEmployee,
+    //         confirm_password: updatedEmployee.password,
+    //       };
 
-    //   if (indexToDelete !== -1) {
-    //     const deletedEmployee = employees.splice(indexToDelete, 1)[0];
-    //     res.writeHead(200, { "Content-Type": "application/json" });
-    //     res.end(JSON.stringify(deletedEmployee));
-    //   } else {
-    //     res.writeHead(404, { "Content-Type": "application/json" });
-    //     res.end(JSON.stringify({ message: "User not found" }));
-    //   }
+    //       res.writeHead(200, { "Content-Type": "application/json" });
+    //       res.end(
+    //         JSON.stringify({ message: "Employee data updated successfully" })
+    //       );
+    //     } else {
+    //       res.writeHead(404, { "Content-Type": "application/json" });
+    //       res.end(JSON.stringify({ message: "Employee not found" }));
+    //     }
+    //   });
+
+    //-----------------------------------------------------------------------
+  } else if (url.pathname === "/delete" && req.method === "DELETE") {
+    let data = "";
+
+    req.on("data", (chunk) => {
+      data += chunk.toString();
+    });
+
+    req.on("end", () => {
+      const { email } = JSON.parse(data);
+
+      const indexToDelete = employees.findIndex(
+        (employee) => employee.email === email
+      );
+
+      if (indexToDelete !== -1) {
+        employees.splice(indexToDelete, 1);
+
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ message: "Employee deleted successfully" }));
+      } else {
+        res.writeHead(404, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Employee not found" }));
+      }
+      console.log("after deletion:::::::", employees);
+    });
   } else {
     res.writeHead(404, { "Content-Type": "text/plain" });
     res.end("404 Not Found\n");
@@ -154,3 +194,4 @@ const server = http.createServer((req, res) => {
 server.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
