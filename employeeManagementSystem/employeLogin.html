@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="employeLogin.css" />
+    <title>Login Page</title>
+  </head>
+  <body>
+    <div class="login-container">
+      <form class="login-form" id="loginForm">
+        <h1>Login</h1>
+        <label for="email">Email:</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Enter email"
+          required
+        />
+        <span id="emailError" class="error"></span>
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter password"
+          required
+        />
+        <span id="passwordError" class="error"></span>
+        <button id="loginButton" type="button" onclick="validateLoginForm()">
+          Login
+        </button>
+        <br />
+        <br />
+        <p class="signup-text">
+          Not a member? <a href="employeSignUp.html">Sign up now</a>
+        </p>
+      </form>
+    </div>
+    <script>
+      function validateLoginForm() {
+        console.log("hiii");
+        let isValid = true;
+
+        // Email validation
+        const emailInput = document.getElementById("email");
+        console.log("Email:", emailInput.value);
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (
+          !emailRegex.test(emailInput.value.trim()) ||
+          !emailInput.value.includes(".com")
+        ) {
+          alert("Enter a valid email address with '.com'");
+          isValid = false;
+        }
+
+        // Password validation
+        const passwordInput = document.getElementById("password");
+        console.log("Password:", passwordInput.value);
+        if (passwordInput.value.length < 8) {
+          alert("Password must be at least 8 characters long");
+          isValid = false;
+        }
+
+        if (isValid) {
+          // Log form data in the console
+          console.log("Form submitted successfully!");
+
+          console.log("Email:", emailInput.value);
+          console.log("Password:", passwordInput.value);
+        }
+        const apiUrl = "http://localhost:3000/login"; // Replace with your API endpoint
+
+        const formData = {
+          // username: document.getElementById("username").value,
+          email: document.getElementById("email").value,
+          password: document.getElementById("password").value,
+          // confirm_password: document.getElementById("confirm-password").value,
+        };
+
+        fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            // You may need to include additional headers like authentication tokens
+          },
+          body: JSON.stringify(formData),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          // .then((data) => {
+          //   // Handle the successful response
+          //   console.log("successfully added", data);
+          // })
+          // Inside the fetch then() block
+          .then((data) => {
+            // Handle the successful response
+            if (data.success) {
+              alert("Login successful!");
+              // Redirect or perform other actions for a successful login
+            } else {
+              alert("Invalid credentials. Please try again.");
+            }
+          })
+
+          .catch((error) => {
+            // Handle errors during the fetch request
+            console.error("Fetch error:", error);
+            alert("An error occurred. Please try again later.");
+          });
+      }
+      // JavaScript for client-side validation------------------------------------------------
+      // const loginForm = document.getElementById("loginForm");
+      // const usernameInput = document.getElementById("email");
+      // const passwordInput = document.getElementById("password");
+      // const loginButton = document.getElementById("loginButton");
+
+      // loginButton.addEventListener("click", () => {
+      //   const username = usernameInput.value;
+      //   const password = passwordInput.value;
+
+      //   // Perform client-side validation
+      //   if (username === "lipsakevadiya@gmail.com" && password === "lipsa123") {
+      //     alert("Login successful! Redirecting...");
+      //     // Redirect to the desired page or perform other actions
+      //   } else {
+      //     alert("Invalid username or password. Please try again.");
+      //   }
+      // });
+      const loginButton = document.getElementById("loginButton");
+
+      loginButton.addEventListener("click", () => {
+        // Redirect to the login page
+        window.location.href = "employeList.html"; // Replace 'login.html' with your actual login page URL
+      });
+    </script>
+  </body>
+</html>
