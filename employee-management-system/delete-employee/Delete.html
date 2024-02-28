@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Deletion</title>
+    <link rel="stylesheet" href="../delete-employee/Delete.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>User Deletion</h1>
+      <form id="deleteForm">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter email to delete"
+          required
+        />
+        <button type="submit" onclick="deleteUser()">Delete User</button>
+      </form>
+    </div>
+    <script src="Delete.js"></script>
+  </body>
+</html>
