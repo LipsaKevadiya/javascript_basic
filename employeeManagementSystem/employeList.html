@@ -54,11 +54,10 @@
         <tr>
           <th>Name</th>
           <th>Email</th>
+          <th>NewUpdatedEmail</th>
         </tr>
       </thead>
-      <tbody id="employeesContainer">
-        <!-- Employee data will be populated here using JavaScript -->
-      </tbody>
+      <tbody id="employeesContainer"></tbody>
     </table>
 
     <button class="btn" onclick="addEmployee()">Add Employee</button>
@@ -68,17 +67,14 @@
 
     <script>
       function addEmployee() {
-        // console.log("Adding Employee...");
         window.location.href = "employeAdd.html";
       }
 
       function editEmployee() {
-        // console.log("Editing Employee with ID:", employeeId);
-        window.location.href = "employeAdd.html";
+        window.location.href = "employeEdit.html";
       }
 
       function deleteEmployee() {
-        // console.log("Deleting Employee with ID:", employeeId);
         window.location.href = "employeDelete.html";
       }
 
@@ -87,7 +83,7 @@
         window.location.href = "employeLogin.html";
       }
 
-      // Fetch employee data from API
+      // Fetch employee data from API and show it into table
       fetch("http://localhost:3000/signup")
         .then((response) => response.json())
         .then((data) => {
@@ -98,6 +94,7 @@
             row.innerHTML = `
                         <td>${employee.username}</td>
                         <td>${employee.email}</td>
+                        <td>${employee.newEmail}</td>
                     `;
             employeesContainer.appendChild(row);
           });
