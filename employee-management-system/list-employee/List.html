@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../list-employee/List.css" />
+    <title>Employee Management</title>
+    <style></style>
+  </head>
+  <body>
+    <h2>Employee List</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>NewUpdatedEmail</th>
+        </tr>
+      </thead>
+      <tbody id="employeesContainer"></tbody>
+    </table>
+
+    <button class="btn" onclick="addEmployee()">Add Employee</button>
+    <button class="btn" onclick="editEmployee()">Edit Employee</button>
+    <button class="btn" onclick="deleteEmployee()">Delete Employee</button>
+    <button class="btn" onclick="logout()" style="float: right">Logout</button>
+
+    <script src="List.js"></script>
+  </body>
+</html>
